@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.7
   freezed_annotation: ^2.4.1
+  google_fonts: ^6.1.0
   hooks_riverpod: ^2.4.3
   riverpod_annotation: ^2.2.0
 
