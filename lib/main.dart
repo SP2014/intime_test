@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intime_test/src/features/conversation/presentation/widgets/counter_pill.dart';
 import 'package:intime_test/src/features/conversation/presentation/widgets/custom_chip.dart';
+import 'package:intime_test/src/features/conversation/presentation/widgets/custom_search_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,7 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
               trailing: const CounterPill(
                 text: '99+',
               ),
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const CustomSearchBar(),
           ],
         ),
       ),
