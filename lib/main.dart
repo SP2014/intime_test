@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intime_test/src/features/conversation/presentation/screens/conversation/conversation_screen.dart';
-import 'package:intime_test/src/features/conversation/presentation/widgets/counter_pill.dart';
-import 'package:intime_test/src/features/conversation/presentation/widgets/custom_chip.dart';
-import 'package:intime_test/src/features/conversation/presentation/widgets/custom_search_bar.dart';
+import 'package:intime_test/src/features/conversation/conversation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -16,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'InTime',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

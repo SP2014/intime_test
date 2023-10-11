@@ -22,7 +22,7 @@ class MessageBanner extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               left: 8.0,
-              right: 8.0,
+              right: 4.0,
               top: 8.0,
             ),
             child: Text(
