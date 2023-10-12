@@ -17,65 +17,40 @@ class ChatList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scController = useScrollController();
-    return ListView.builder(
-        controller: scController,
-        itemCount: 50,
-        shrinkWrap: true,
-        itemBuilder: (c, i) {
-          if (i % 2 == 0) {
-            return MyMessageCard(
-                message: 'Item $i',
-                date: 'Today',
-                username: 'You',
-                isSeen: false);
+    return StreamBuilder<List<ChatMessage>>(
+        stream: ref.read(chatRepositoryProvider).getChatStream(receiverId),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
-          return SenderMessageCard(
-              message: 'Item $i', date: 'Yesterday', username: 'Ashish');
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            scController.jumpTo(scController.position.maxScrollExtent);
+          });
+          return ListView.builder(
+            controller: scController,
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final messageData = snapshot.data![index];
+              var timeSent = DateFormat.Hm().format(messageData.timeSent);
+              if (messageData.senderId ==
+                  FirebaseAuth.instance.currentUser!.uid) {
+                return MyMessageCard(
+                  message: messageData.text,
+                  date: timeSent,
+                  isSeen: messageData.isSeen,
+                  username:
+                      FirebaseAuth.instance.currentUser!.displayName ?? '',
+                );
+              }
+              return SenderMessageCard(
+                message: messageData.text,
+                date: timeSent,
+                username: messageData.senderId,
+              );
+            },
+          );
         });
-    // return StreamBuilder<List<ChatMessage>>(
-    //     stream: ref.read(chatRepositoryProvider).getChatStream(receiverId),
-    //     builder: (ctx, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       }
-    //       SchedulerBinding.instance.addPostFrameCallback((_) {
-    //         scController.jumpTo(scController.position.maxScrollExtent);
-    //       });
-    //       return ListView.builder(
-    //         controller: scController,
-    //         itemCount: snapshot.data!.length,
-    //         itemBuilder: (context, index) {
-    //           final messageData = snapshot.data![index];
-    //           var timeSent = DateFormat.Hm().format(messageData.timeSent);
-
-    //           // if (!messageData.isSeen &&
-    //           //     messageData.recieverid ==
-    //           //         FirebaseAuth.instance.currentUser!.uid) {
-    //           //   ref.read(chatControllerProvider).setChatMessageSeen(
-    //           //         context,
-    //           //         widget.recieverUserId,
-    //           //         messageData.messageId,
-    //           //       );
-    //           // }
-    //           if (messageData.senderId ==
-    //               FirebaseAuth.instance.currentUser!.uid) {
-    //             return MyMessageCard(
-    //               message: messageData.text,
-    //               date: timeSent,
-    //               isSeen: messageData.isSeen,
-    //               username:
-    //                   FirebaseAuth.instance.currentUser!.displayName ?? '',
-    //             );
-    //           }
-    //           return SenderMessageCard(
-    //             message: messageData.text,
-    //             date: timeSent,
-    //             username: messageData.senderId,
-    //           );
-    //         },
-    //       );
-    //     });
   }
 }

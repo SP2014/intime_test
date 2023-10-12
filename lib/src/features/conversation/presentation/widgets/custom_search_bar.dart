@@ -11,6 +11,10 @@ class CustomSearchBar extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         filled: true,
+        contentPadding: EdgeInsets.symmetric(
+          vertical: DimensionConstants.searchBarVerticalPadding,
+          horizontal: DimensionConstants.searchBarHorizontalPadding,
+        ),
         suffixIcon: ConstrainedBox(
           constraints: const BoxConstraints.tightFor(width: 24, height: 24),
           child: Padding(

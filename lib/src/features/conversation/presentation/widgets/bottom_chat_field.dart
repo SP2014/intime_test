@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intime_test/src/core/core.dart';
+import 'package:intime_test/src/features/auth/auth.dart';
+import 'package:intime_test/src/features/conversation/domain/domain.dart';
 import 'package:intime_test/src/utils/extensions.dart';
 
 class BottomChatField extends HookConsumerWidget {
@@ -52,7 +54,16 @@ class BottomChatField extends HookConsumerWidget {
           ),
           24.vgap(),
           GestureDetector(
-            onTap: isShowSendButton.value ? () {} : null,
+            onTap: isShowSendButton.value
+                ? () async {
+                    final currentUser =
+                        await ref.read(authControllerProvider).getCurrentUser();
+                    ref.read(chatRepositoryProvider).sendTextMessage(
+                        text: messageController.text,
+                        receiverId: receiverId,
+                        senderUser: currentUser!);
+                  }
+                : null,
             child: Icon(Icons.send, size: 24, color: ColorConstants.colorBg),
           ),
         ],

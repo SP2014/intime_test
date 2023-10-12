@@ -17,7 +17,7 @@ GoRouter appRoute(AppRouteRef ref) {
     navigatorKey: navigationKey,
     initialLocation: RoutesLocation.splash,
     refreshListenable: notifier,
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: false,
     routes: routes,
     redirect: (context, state) {
       if (authState.isLoading || authState.hasError) return null;

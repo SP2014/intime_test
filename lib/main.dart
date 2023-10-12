@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intime_test/src/core/core.dart';
 import 'package:intime_test/src/core/routes/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +25,7 @@ class App extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         title: 'InTime',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: ColorConstants.colorBg),
           useMaterial3: true,
         ).copyWith(
             textTheme: GoogleFonts.dmSansTextTheme(),
