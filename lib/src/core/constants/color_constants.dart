@@ -9,6 +9,7 @@ class ColorConstants {
   static Color colorBlack = const Color(0xFF000000);
   static Color colorPurple = const Color(0xFF20335B);
   static Color colorBg10 = const Color(0x1A3683FC);
+  static Color colorBg18 = const Color(0x2E3683FC);
   static Color colorBg = const Color(0XFF3683FC);
   //050D19
   //3683FC

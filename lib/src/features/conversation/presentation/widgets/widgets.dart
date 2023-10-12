@@ -4,3 +4,6 @@ export './message_banner.dart';
 export './custom_search_bar.dart';
 export './counter_pill.dart';
 export './models/models.dart';
+export './bottom_chat_field.dart';
+export './chat_list.dart';
+export './chat_profile_header.dart';
