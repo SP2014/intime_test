@@ -7,46 +7,29 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(DimensionConstants.searchBarBorderRadius),
-        color: ColorConstants.colorPrimaryDisabled,
-      ),
-      padding: EdgeInsets.symmetric(
-        vertical: DimensionConstants.searchBarVerticalPadding,
-        horizontal: DimensionConstants.searchBarHorizontalPadding,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-              child: TextField(
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: StringConstants.searchBarHintText,
-              hintStyle: TextStyle(
-                color: ColorConstants.colorPrimaryAlpha30,
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          )),
-          const SizedBox(
-            width: 10,
-          ),
-          ConstrainedBox(
-            constraints: const BoxConstraints.tightFor(
-              width: 24,
-              height: 24,
-            ),
+    return TextFormField(
+      decoration: InputDecoration(
+        isDense: true,
+        filled: true,
+        suffixIcon: ConstrainedBox(
+          constraints: const BoxConstraints.tightFor(width: 24, height: 24),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
               CustomIcons.searchIcon,
-              width: 24,
-              height: 24,
             ),
-          )
-        ],
+          ),
+        ),
+        fillColor: ColorConstants.colorPrimaryDisabled,
+        focusColor: ColorConstants.colorWhite,
+        hintText: StringConstants.searchBarHintText,
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius:
+              BorderRadius.circular(DimensionConstants.searchBarBorderRadius),
+        ),
       ),
+      onFieldSubmitted: (value) {},
     );
   }
 }

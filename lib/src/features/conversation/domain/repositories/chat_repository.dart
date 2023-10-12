@@ -1,3 +1,4 @@
+import 'package:intime_test/src/features/auth/auth.dart';
 import 'package:intime_test/src/features/conversation/data/data.dart';
 
 abstract class ChatRepository {

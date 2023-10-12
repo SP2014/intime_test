@@ -28,7 +28,7 @@ class MessageBanner extends StatelessWidget {
             child: Text(
               message,
               style: const TextStyle(
-                color: Colors.white,
+                color: Color(0xFF0C1E3C),
                 fontSize: 18,
                 fontWeight: FontWeight.normal,
               ),
