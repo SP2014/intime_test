@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intime_test/src/features/auth/auth.dart';
 import 'package:intime_test/src/features/conversation/data/data.dart';
 import 'package:intime_test/src/features/conversation/domain/domain.dart';
 import 'package:uuid/uuid.dart';
