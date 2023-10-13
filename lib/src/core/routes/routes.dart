@@ -27,7 +27,11 @@ final routes = [
                 uid: pageModel['uid']!,
                 profilePic: pageModel['profilePic']!);
           },
-        )
+        ),
+        GoRoute(
+          path: RoutesLocation.profile,
+          builder: (context, state) => const ProfilePreviewScreen(),
+        ),
       ]),
   GoRoute(
     path: RoutesLocation.splash,
