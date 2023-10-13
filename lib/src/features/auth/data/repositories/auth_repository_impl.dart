@@ -56,4 +56,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Stream<User?> authStateChanges() async* {
     yield* auth.authStateChanges();
   }
+
+  @override
+  Future<void> logout() async {
+    return auth.signOut();
+  }
 }

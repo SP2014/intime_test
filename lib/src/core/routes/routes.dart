@@ -14,21 +14,21 @@ final routes = [
     builder: (context, state) => const LoginScreen(),
   ),
   GoRoute(
-    path: RoutesLocation.chat,
-    parentNavigatorKey: navigationKey,
-    builder: (context, state) {
-      final pageModel = state.pathParameters;
-      return ChatScreen(
-          name: pageModel['name']!,
-          uid: pageModel['uid']!,
-          profilePic: pageModel['profilePic']!);
-    },
-  ),
-  GoRoute(
-    path: RoutesLocation.conversation,
-    parentNavigatorKey: navigationKey,
-    builder: (context, state) => const ConversationScreen(),
-  ),
+      path: RoutesLocation.conversation,
+      parentNavigatorKey: navigationKey,
+      builder: (context, state) => const ConversationScreen(),
+      routes: [
+        GoRoute(
+          path: RoutesLocation.chat,
+          builder: (context, state) {
+            final pageModel = state.extra! as Map<String, dynamic>;
+            return ChatScreen(
+                name: pageModel['name']!,
+                uid: pageModel['uid']!,
+                profilePic: pageModel['profilePic']!);
+          },
+        )
+      ]),
   GoRoute(
     path: RoutesLocation.splash,
     parentNavigatorKey: navigationKey,

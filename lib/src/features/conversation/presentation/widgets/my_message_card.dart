@@ -27,17 +27,22 @@ class MyMessageCard extends StatelessWidget {
         ),
         child: Card(
           elevation: 1,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: ColorConstants.colorBg10,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8))),
+          color: ColorConstants.msgSenderColor,
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Stack(
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 10,
-                  right: 30,
-                  top: 5,
-                  bottom: 20,
+                  left: 8,
+                  right: 8,
+                  top: 8,
+                  bottom: 8,
                 ),
                 child: Column(
                   children: [
@@ -47,29 +52,29 @@ class MyMessageCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 4,
-                right: 10,
-                child: Row(
-                  children: [
-                    Text(
-                      date,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.white60,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Icon(
-                      isSeen ? Icons.done_all : Icons.done,
-                      size: 20,
-                      color: isSeen ? Colors.blue : Colors.white60,
-                    ),
-                  ],
-                ),
-              ),
+              // Positioned(
+              //   bottom: 4,
+              //   right: 10,
+              //   child: Row(
+              //     children: [
+              //       Text(
+              //         date,
+              //         style: const TextStyle(
+              //           fontSize: 13,
+              //           color: Colors.white60,
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 5,
+              //       ),
+              //       Icon(
+              //         isSeen ? Icons.done_all : Icons.done,
+              //         size: 20,
+              //         color: isSeen ? Colors.blue : Colors.white60,
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

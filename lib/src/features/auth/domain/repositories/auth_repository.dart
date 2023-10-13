@@ -7,4 +7,5 @@ abstract class AuthRepository {
       {String? userName});
   Stream<UserModel> userData(String userId);
   Stream<User?> authStateChanges();
+  Future<void> logout();
 }

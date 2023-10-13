@@ -12,6 +12,7 @@ class ColorConstants {
   static Color colorBg18 = const Color(0x2E3683FC);
   static Color colorBg = const Color(0XFF3683FC);
   static Color msgSenderColor = const Color(0x2E22DB6C);
+  //22DB6C2E
   //050D19
   //3683FC
 }

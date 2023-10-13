@@ -29,7 +29,7 @@ class SelectionList extends StatelessWidget {
             trailing: options[idx].trailing,
             text: options[idx].title,
             isActive: options[idx].isActive,
-            onClick: onOptionClicked(
+            onClick: () => onOptionClicked(
               options[idx],
             ),
           ),

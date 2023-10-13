@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ConversationListTile extends StatelessWidget {
@@ -15,7 +16,7 @@ class ConversationListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onClick,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 50),

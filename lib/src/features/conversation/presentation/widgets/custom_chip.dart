@@ -19,7 +19,7 @@ class CustomChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final active = useState(isActive);
+    //final active = useState(isActive);
     return Material(
       borderRadius: BorderRadius.circular(DimensionConstants.chipBorderRadius),
       child: InkWell(
@@ -27,7 +27,7 @@ class CustomChip extends HookWidget {
             BorderRadius.circular(DimensionConstants.chipBorderRadius),
         onTap: onClick != null
             ? () {
-                active.value = !active.value;
+                //active.value = !active.value;
                 onClick!();
               }
             : null,
@@ -35,7 +35,7 @@ class CustomChip extends HookWidget {
           decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(DimensionConstants.chipBorderRadius),
-            color: active.value
+            color: isActive
                 ? ColorConstants.colorPrimary
                 : ColorConstants.colorPrimaryDisabled,
           ),
@@ -55,10 +55,9 @@ class CustomChip extends HookWidget {
               Text(
                 text,
                 style: TextStyle(
-                  fontWeight:
-                      active.value ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                   fontSize: 15,
-                  color: active.value
+                  color: isActive
                       ? ColorConstants.colorWhite
                       : ColorConstants.colorPurple,
                 ),

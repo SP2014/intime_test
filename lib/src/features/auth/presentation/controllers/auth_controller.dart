@@ -17,17 +17,11 @@ class AuthController {
 
   void authenticateUser(
       String email, String password, String name, BuildContext context) {
-    authRepository
-        .signInWithEmail(email, password, userName: name)
-        .then(
-          (_) => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (c) => const ConversationScreen(),
-            ),
-          ),
-        )
-        .onError((error, stackTrace) => ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(error.toString()))));
+    authRepository.signInWithEmail(email, password, userName: name).then((_) {
+      debugPrint('User Authenticated');
+    }).onError((error, stackTrace) {
+      print(error);
+    });
   }
 
   Future<UserModel?> getCurrentUser() async {
@@ -40,5 +34,11 @@ class AuthController {
 
   Stream<User?> authStateChanges() {
     return authRepository.authStateChanges();
+  }
+
+  void logoutUser() {
+    authRepository.logout().then((value) {
+      debugPrint('User logged out');
+    });
   }
 }

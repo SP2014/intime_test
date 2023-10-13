@@ -62,6 +62,8 @@ class BottomChatField extends HookConsumerWidget {
                         text: messageController.text,
                         receiverId: receiverId,
                         senderUser: currentUser!);
+                    messageController.clear();
+                    isShowSendButton.value = false;
                   }
                 : null,
             child: Icon(Icons.send, size: 24, color: ColorConstants.colorBg),
