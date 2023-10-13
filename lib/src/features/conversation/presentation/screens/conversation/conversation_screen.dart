@@ -7,7 +7,7 @@ import 'package:intime_test/src/core/core.dart';
 import 'package:intime_test/src/core/routes/routes_location.dart';
 import 'package:intime_test/src/features/auth/auth.dart';
 import 'package:intime_test/src/features/conversation/presentation/providers/providers.dart';
-import 'package:intime_test/src/features/conversation/presentation/screens/message/chat_screen.dart';
+import 'package:intime_test/src/features/conversation/presentation/widgets/recent_chat.dart';
 import 'package:intime_test/src/features/conversation/presentation/widgets/widgets.dart';
 import 'package:intime_test/src/utils/extensions.dart';
 
@@ -86,74 +86,77 @@ class ConversationScreen extends HookConsumerWidget {
                         },
                       ),
                       16.hgap(),
+                      (data.isDataPresent && data.showRecent!)
+                          ? RecentWidget(
+                              data: data.chatContacts!.last,
+                            )
+                          : const SizedBox.shrink(),
+                      (data.isDataPresent &&
+                              (data.currentFilter == null ||
+                                  data.currentFilter!.isEmpty))
+                          ? ListFilterHeader(onTap: () {})
+                          : const SizedBox.shrink(),
+                      24.hgap(),
                       data.isLoading
                           ? const Expanded(
                               child: Center(
                               child: CircularProgressIndicator(),
                             ))
                           : const SizedBox.shrink(),
-                      if (data.chatContacts != null)
-                        Flexible(
-                          child: ListView.builder(
-                            itemCount: data.chatContacts?.length,
-                            shrinkWrap: true,
-                            itemBuilder: (c, i) => Container(
-                              margin: const EdgeInsets.only(bottom: 16),
-                              child: ConversationListTile(
-                                leading: UserProfileWidget(
-                                  profileImage:
-                                      data.chatContacts?[i].profilePic,
-                                  onClick: () {
-                                    debugPrint('I got clicked');
-                                  },
-                                ),
-                                onClick: () {
-                                  context.go(
-                                      '${RoutesLocation.conversation}/chat',
-                                      extra: {
-                                        'name': data.chatContacts?[i].name,
-                                        'uid': data.chatContacts?[i].contactId,
-                                        'profilePic':
-                                            data.chatContacts?[i].profilePic
-                                      });
-
-                                  // Navigator.of(context).push(MaterialPageRoute(
-                                  //     builder: (ctx) => const ChatScreen(
-                                  //         name: 'Patient3',
-                                  //         uid: 'gpfHuEuehdP9OiIsSzJlxgOBuhB3',
-                                  //         profilePic:
-                                  //             'https://i.pravatar.cc/100')));
-                                },
-                                trailing: SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: Center(
-                                      child: SvgPicture.asset(
-                                    i % 2 == 0
-                                        ? CustomIcons.normalChatIcon
-                                        : CustomIcons.activeChatIcon,
-                                  )),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data.chatContacts?[i].name ?? '',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                      ),
+                      data.isDataPresent
+                          ? Flexible(
+                              child: ListView.builder(
+                                itemCount: data.chatContacts?.length,
+                                shrinkWrap: true,
+                                itemBuilder: (c, i) => Container(
+                                  margin: const EdgeInsets.only(bottom: 16),
+                                  child: ConversationListTile(
+                                    leading: UserProfileWidget(
+                                      profileImage:
+                                          data.chatContacts?[i].profilePic,
+                                      onClick: () {
+                                        context.go(
+                                            '${RoutesLocation.conversation}/profile');
+                                      },
                                     ),
-                                    Text(
-                                        data.chatContacts?[i].lastMessage ?? '',
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        )),
-                                  ],
+                                    onClick: () {
+                                      context.go(
+                                          '${RoutesLocation.conversation}/chat',
+                                          extra: {
+                                            'name': data.chatContacts?[i].name,
+                                            'uid':
+                                                data.chatContacts?[i].contactId,
+                                            'profilePic':
+                                                data.chatContacts?[i].profilePic
+                                          });
+                                    },
+                                    trailing: SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: Center(
+                                          child: SvgPicture.asset(
+                                        i % 2 == 0
+                                            ? CustomIcons.normalChatIcon
+                                            : CustomIcons.activeChatIcon,
+                                      )),
+                                    ),
+                                    child: TileContent(
+                                      title: data.chatContacts?[i].name ?? '',
+                                      subtitle:
+                                          data.chatContacts?[i].lastMessage ??
+                                              '',
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
+                            )
+                          : !data.isLoading
+                              ? const Expanded(
+                                  child: Center(
+                                    child: Text('No conversations yet....'),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
                     ],
                   ),
               error: (_, __) => const Center(

@@ -14,10 +14,12 @@ class ConversationState with _$ConversationState {
     bool? showRecent,
     List<dynamic>? filters,
     List<ChatContact>? chatContacts,
+    required bool isDataPresent,
   }) = _ConversationState;
 
   const factory ConversationState.initial(
     bool isLoading,
+    bool isDataPresent,
     List<dynamic> filters,
     bool showRecent, {
     String? currentFilter,
